@@ -19,35 +19,35 @@ model User {
 }
 
 model Category {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  Test Test[]
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tests Test[]
 
   @@map("categories")
 }
 
 model Teacher {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  TeacherDiscipline TeacherDiscipline[]
+  id                  Int                 @id @default(autoincrement())
+  name                String              @unique
+  teachersDisciplines TeacherDiscipline[]
 
   @@map("teachers")
 }
 
 model Term {
-  id         Int          @id @default(autoincrement())
-  number     Int          @unique
-  Discipline Discipline[]
+  id          Int          @id @default(autoincrement())
+  number      Int          @unique
+  disciplines Discipline[]
 
   @@map("terms")
 }
 
 model Discipline {
-  id                Int                 @id @default(autoincrement())
-  name              String              @unique
-  term              Term                @relation(fields: [termId], references: [id])
-  termId            Int
-  TeacherDiscipline TeacherDiscipline[]
+  id                  Int                 @id @default(autoincrement())
+  name                String              @unique
+  term                Term                @relation(fields: [termId], references: [id])
+  termId              Int
+  teachersDisciplines TeacherDiscipline[]
 
   @@map("disciplines")
 }
@@ -58,7 +58,7 @@ model TeacherDiscipline {
   teacherId    Int
   discipline   Discipline @relation(fields: [disciplineId], references: [id])
   disciplineId Int
-  Test         Test[]
+  tests        Test[]
 
   @@map("teachersDisciplines")
 }
