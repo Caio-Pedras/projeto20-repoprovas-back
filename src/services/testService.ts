@@ -1,9 +1,14 @@
-import { getCategoryByName } from "../repositories/categoryRepository";
-import { getDisciplineByName } from "../repositories/disciplineRepository";
-import { getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository";
-import { getTeacherByName } from "../repositories/teacherRepository";
-import { insertTest } from "../repositories/testRepository";
-import { notFoundError } from "../utils/errorUtils";
+import { group } from "console";
+import { getCategoryByName } from "../repositories/categoryRepository.js";
+import { getDisciplineByName } from "../repositories/disciplineRepository.js";
+import { getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository.js";
+import { getTeacherByName } from "../repositories/teacherRepository.js";
+import {
+  findAllTestsByDiscipline,
+  findAllTestsByTeacher,
+  insertTest,
+} from "../repositories/testRepository.js";
+import { badRequestError, notFoundError } from "../utils/errorUtils.js";
 
 interface TestInterface {
   name: string;
@@ -37,4 +42,16 @@ export async function createTestService(test: TestInterface) {
     teacherDisciplineId,
   };
   await insertTest(insertData);
+}
+
+export async function FindTestsByTagService(groupBy: string) {
+  if (groupBy !== "disciplines" && groupBy !== "teachers") {
+    throw badRequestError("You must inform a valid group by clasule");
+  }
+  if (groupBy === "disciplines") {
+    return await findAllTestsByDiscipline();
+  }
+  if (groupBy === "teachers") {
+    return await findAllTestsByTeacher();
+  }
 }
