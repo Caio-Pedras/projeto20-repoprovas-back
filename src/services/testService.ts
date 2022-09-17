@@ -1,16 +1,16 @@
 import { group } from "console";
-import { getCategoryByName } from "../repositories/categoryRepository.js";
-import { getDisciplineByName } from "../repositories/disciplineRepository.js";
-import { getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository.js";
-import { getTeacherByName } from "../repositories/teacherRepository.js";
+import { getCategoryByName } from "../repositories/categoryRepository";
+import { getDisciplineByName } from "../repositories/disciplineRepository";
+import { getTeacherDisciplineByIds } from "../repositories/teacherDisciplineRepository";
+import { getTeacherByName } from "../repositories/teacherRepository";
 import {
   findAllTestsByDiscipline,
   findAllTestsByTeacher,
   insertTest,
-} from "../repositories/testRepository.js";
-import { badRequestError, notFoundError } from "../utils/errorUtils.js";
+} from "../repositories/testRepository";
+import { badRequestError, notFoundError } from "../utils/errorUtils";
 
-interface TestInterface {
+export interface TestInterface {
   name: string;
   pdfUrl: string;
   category: string;
@@ -31,15 +31,18 @@ export async function createTestService(test: TestInterface) {
     throw notFoundError("discipline not found");
   }
 
-  const { id: teacherDisciplineId } = await getTeacherDisciplineByIds(
+  const teacherDiscipline = await getTeacherDisciplineByIds(
     teacher.id,
     discipline.id
   );
+  if (!teacherDiscipline) {
+    throw notFoundError("teacher with the informed discipline not found");
+  }
   const insertData = {
     name: test.name,
     pdfUrl: test.pdfUrl,
     categoryId: category.id,
-    teacherDisciplineId,
+    teacherDisciplineId: teacherDiscipline.id,
   };
   await insertTest(insertData);
 }

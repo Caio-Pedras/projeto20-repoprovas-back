@@ -1,4 +1,4 @@
-import { prisma } from "../config/database.js";
+import { prisma } from "../config/database";
 import { Test } from "@prisma/client";
 export type CreateTestData = Omit<Test, "id">;
 export async function insertTest(test: CreateTestData) {

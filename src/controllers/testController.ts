@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
   createTestService,
   FindTestsByTagService,
-} from "../services/testService.js";
+} from "../services/testService";
 
 export async function postTest(req: Request, res: Response) {
   const test = req.body;

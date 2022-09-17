@@ -1,8 +1,8 @@
 import { NextFunction, Request, Response } from "express";
-import { errorTypeStatusCode, isAppError } from "../utils/errorUtils.js";
+import { errorTypeStatusCode, isAppError } from "../utils/errorUtils";
 
 export default function errorHandler(
-  err,
+  err: any,
   req: Request,
   res: Response,
   next: NextFunction

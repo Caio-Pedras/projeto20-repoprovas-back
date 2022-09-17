@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser, login } from "../services/authService.js";
+import { createUser, login } from "../services/authService";
 
 export async function postSignup(req: Request, res: Response) {
   const user = { email: req.body.email, password: req.body.password };

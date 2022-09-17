@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 // import Cryptr from "cryptr";
-import { unauthorizedError } from "./errorUtils.js";
+import { unauthorizedError } from "./errorUtils";
 
 // const cryptr = new Cryptr(process.env.CRYPTR_SECRET as string);
 

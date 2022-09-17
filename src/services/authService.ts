@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { User } from "@prisma/client";
-import { conflictError, unauthorizedError } from "../utils/errorUtils.js";
-import { findUserByEmail, insertUser } from "../repositories/authRepository.js";
-import { bcryptCompare, bcryptString } from "../utils/encryptUtils.js";
+import { conflictError, unauthorizedError } from "../utils/errorUtils";
+import { findUserByEmail, insertUser } from "../repositories/authRepository";
+import { bcryptCompare, bcryptString } from "../utils/encryptUtils";
 
 export type CreateUserData = Omit<User, "id">;
 export async function createUser(user: CreateUserData) {
