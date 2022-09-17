@@ -1,4 +1,4 @@
-import { prisma } from "../src/config/database.js";
+import { prisma } from "../src/config/database";
 async function main() {
   //modulos do curso
   await prisma.term.createMany({
@@ -46,3 +46,11 @@ async function main() {
     ],
   });
 }
+main()
+  .catch((e) => {
+    console.log(e);
+    process.exit(1);
+  })
+  .finally(async () => {
+    await prisma.$disconnect();
+  });
