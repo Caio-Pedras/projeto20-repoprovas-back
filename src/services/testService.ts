@@ -49,7 +49,7 @@ export async function createTestService(test: TestInterface) {
 
 export async function FindTestsByTagService(groupBy: string) {
   if (groupBy !== "disciplines" && groupBy !== "teachers") {
-    throw badRequestError("You must inform a valid group by clasule");
+    throw badRequestError("You must inform a valid group by clause");
   }
   if (groupBy === "disciplines") {
     return await findAllTestsByDiscipline();
