@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/src/server.js",
     "dev": "nodemon src/server.ts",
-    "prisma-test":"dotenv -e .env.test prisma migrate reset",
+    "prisma-test": "dotenv -e .env.test prisma migrate reset",
     "test": "npm run prisma-test && cross-env NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i"
   },
   "prisma": {
@@ -19,6 +19,7 @@
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
     "@prisma/client": "^4.3.1",
+    "@sendgrid/mail": "^7.7.0",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",

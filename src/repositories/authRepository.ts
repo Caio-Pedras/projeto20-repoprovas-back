@@ -7,3 +7,6 @@ export async function findUserByEmail(email: string) {
 export async function insertUser(user: CreateUserData) {
   return prisma.user.create({ data: user });
 }
+export async function findAllUsers() {
+  return prisma.user.findMany({ select: { email: true } });
+}

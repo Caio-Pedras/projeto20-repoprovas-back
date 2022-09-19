@@ -9,6 +9,7 @@ import {
   insertTest,
 } from "../repositories/testRepository";
 import { badRequestError, notFoundError } from "../utils/errorUtils";
+import { sendEmail } from "../utils/sendEmail";
 
 export interface TestInterface {
   name: string;
@@ -45,6 +46,9 @@ export async function createTestService(test: TestInterface) {
     teacherDisciplineId: teacherDiscipline.id,
   };
   await insertTest(insertData);
+  const emailData = `A seguinte prova foi adicionada ${test.teacher} ${test.category} - ${test.name} (${test.discipline})`;
+  await sendEmail(emailData);
+  return;
 }
 
 export async function FindTestsByTagService(groupBy: string) {
