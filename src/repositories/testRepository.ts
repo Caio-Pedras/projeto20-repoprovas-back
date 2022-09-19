@@ -6,6 +6,7 @@ export async function insertTest(test: CreateTestData) {
 }
 export async function findAllTestsByDiscipline() {
   return prisma.term.findMany({
+    orderBy: [{ number: "asc" }],
     include: {
       disciplines: {
         include: {
@@ -24,6 +25,7 @@ export async function findAllTestsByDiscipline() {
                     },
                   },
                 },
+                orderBy: [{ categoryId: "asc" }],
               },
             },
           },
@@ -48,5 +50,6 @@ export async function findAllTestsByTeacher() {
         },
       },
     },
+    orderBy: [{ teacherId: "asc" }, { disciplineId: "asc" }],
   });
 }
